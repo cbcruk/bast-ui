@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>bast-ui · Collapsible</title>
+    <script type="importmap">
+      {
+        "imports": {
+          "@microsoft/fast-element": "/node_modules/@microsoft/fast-element/dist/esm/index.js",
+          "@microsoft/fast-element/context.js": "/node_modules/@microsoft/fast-element/dist/esm/context.js"
+        }
+      }
+    </script>
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        max-width: 32rem;
+        margin: 4rem auto;
+        padding: 0 1rem;
+      }
+
+      bast-collapsible {
+        display: block;
+        border: 1px solid #d0d0d0;
+        border-radius: 8px;
+        overflow: hidden;
+      }
+
+      bast-collapsible-trigger {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.75rem 1rem;
+        cursor: pointer;
+        user-select: none;
+        font-weight: 600;
+      }
+
+      bast-collapsible-trigger[data-disabled] {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      bast-collapsible-trigger::after {
+        content: '▸';
+        transition: transform 150ms ease;
+      }
+
+      bast-collapsible-trigger[data-open]::after {
+        transform: rotate(90deg);
+      }
+
+      bast-collapsible-panel {
+        display: block;
+        padding: 0.75rem 1rem;
+        border-top: 1px solid #eee;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Collapsible</h1>
+    <p>
+      Headless behavior + ARIA from <code>bast-ui</code>, all styling driven by
+      <code>data-open</code> / <code>data-closed</code> / <code>data-disabled</code>.
+    </p>
+
+    <bast-collapsible open>
+      <bast-collapsible-trigger>What is bast-ui?</bast-collapsible-trigger>
+      <bast-collapsible-panel>
+        A headless web-component implementation of Base UI primitives, built on FAST. No framework
+        runtime required.
+      </bast-collapsible-panel>
+    </bast-collapsible>
+
+    <script type="module">
+      import '/dist/index.mjs'
+    </script>
+  </body>
+</html>
