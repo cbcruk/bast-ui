@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>bast-ui · Popover</title>
+    <script type="importmap">
+      {
+        "imports": {
+          "@microsoft/fast-element": "/node_modules/@microsoft/fast-element/dist/esm/index.js",
+          "@microsoft/fast-element/context.js": "/node_modules/@microsoft/fast-element/dist/esm/context.js"
+        }
+      }
+    </script>
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        max-width: 40rem;
+        margin: 4rem auto;
+        padding: 0 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 40vh;
+        align-items: center;
+      }
+
+      bast-popover-trigger {
+        display: inline-flex;
+        padding: 0.5rem 1rem;
+        border: 1px solid #d0d0d0;
+        border-radius: 6px;
+        background: #fff;
+        cursor: pointer;
+        font: inherit;
+      }
+
+      bast-popover-positioner {
+        outline: none;
+      }
+
+      bast-popover-popup {
+        display: block;
+        width: 18rem;
+        padding: 1rem;
+        border-radius: 10px;
+        background: #fff;
+        border: 1px solid #e0e0e0;
+        box-shadow: 0 8px 30px rgb(0 0 0 / 0.12);
+      }
+
+      bast-popover-positioner:not([popover]) {
+        z-index: 50;
+      }
+
+      bast-popover-title {
+        display: block;
+        font-weight: 700;
+        margin-bottom: 0.25rem;
+      }
+
+      bast-popover-description {
+        display: block;
+        color: #555;
+        font-size: 0.875rem;
+      }
+
+      bast-popover-close {
+        display: inline-flex;
+        margin-top: 0.75rem;
+        padding: 0.35rem 0.75rem;
+        border: 1px solid #d0d0d0;
+        border-radius: 6px;
+        background: #fff;
+        cursor: pointer;
+        font: inherit;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Popover</h1>
+    <p>
+      Anchored to its trigger with automatic flip and viewport shifting. Non-modal: closes on
+      outside click or <code>Escape</code>. Scroll the page to watch it track and flip.
+    </p>
+
+    <bast-popover side="bottom" align="center" side-offset="8">
+      <bast-popover-trigger>Toggle popover</bast-popover-trigger>
+      <bast-popover-positioner>
+        <bast-popover-popup>
+          <bast-popover-title>Notifications</bast-popover-title>
+          <bast-popover-description>
+            You are all caught up. New activity will appear here.
+          </bast-popover-description>
+          <bast-popover-close>Got it</bast-popover-close>
+        </bast-popover-popup>
+      </bast-popover-positioner>
+    </bast-popover>
+
+    <script type="module">
+      import '/dist/index.mjs'
+    </script>
+  </body>
+</html>
