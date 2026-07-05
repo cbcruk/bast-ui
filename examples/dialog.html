@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>bast-ui · Dialog</title>
+    <script type="importmap">
+      {
+        "imports": {
+          "@microsoft/fast-element": "/node_modules/@microsoft/fast-element/dist/esm/index.js",
+          "@microsoft/fast-element/context.js": "/node_modules/@microsoft/fast-element/dist/esm/context.js"
+        }
+      }
+    </script>
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        max-width: 40rem;
+        margin: 4rem auto;
+        padding: 0 1rem;
+      }
+
+      button,
+      bast-dialog-trigger,
+      bast-dialog-close {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.5rem 1rem;
+        border: 1px solid #d0d0d0;
+        border-radius: 6px;
+        background: #fff;
+        cursor: pointer;
+        font: inherit;
+      }
+
+      bast-dialog-backdrop {
+        position: fixed;
+        inset: 0;
+        background: rgb(0 0 0 / 0.5);
+      }
+
+      bast-dialog-popup {
+        position: fixed;
+        inset: 0;
+        margin: auto;
+        width: min(28rem, calc(100vw - 2rem));
+        height: fit-content;
+        padding: 1.5rem;
+        border-radius: 12px;
+        background: #fff;
+        box-shadow: 0 10px 40px rgb(0 0 0 / 0.2);
+      }
+
+      bast-dialog-popup:not([popover]) {
+        z-index: 50;
+      }
+
+      bast-dialog-title {
+        display: block;
+        font-size: 1.25rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+      }
+
+      bast-dialog-description {
+        display: block;
+        color: #555;
+        margin-bottom: 1.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Dialog</h1>
+    <p>
+      Native top-layer via the <code>popover</code> API where supported, with a focus trap,
+      <code>Escape</code> / backdrop dismiss, scroll lock, and inert background — all headless.
+    </p>
+
+    <bast-dialog>
+      <bast-dialog-trigger>Open dialog</bast-dialog-trigger>
+      <bast-dialog-backdrop></bast-dialog-backdrop>
+      <bast-dialog-popup>
+        <bast-dialog-title>Delete project</bast-dialog-title>
+        <bast-dialog-description>
+          This action cannot be undone. This will permanently delete the project and all of its
+          data.
+        </bast-dialog-description>
+        <input placeholder="Type the project name to confirm" />
+        <div style="margin-top: 1.5rem; display: flex; gap: 0.5rem; justify-content: flex-end">
+          <bast-dialog-close>Cancel</bast-dialog-close>
+          <bast-dialog-close style="background: #e5484d; color: #fff; border-color: #e5484d">
+            Delete
+          </bast-dialog-close>
+        </div>
+      </bast-dialog-popup>
+    </bast-dialog>
+
+    <script type="module">
+      import '/dist/index.mjs'
+    </script>
+  </body>
+</html>

@@ -8,7 +8,7 @@ Base UI and Radix are excellent but React-only. `bast-ui` mirrors their
 component anatomy and styling contract (`data-open`, `data-closed`,
 `data-disabled`, matching ARIA) as framework-agnostic custom elements, so the
 same primitives work in any page — and stay small enough for browser extensions
-(the current build is ~1 kB gzipped).
+(Collapsible + Dialog + runtime is ~3 kB gzipped).
 
 ## Design
 
@@ -19,7 +19,11 @@ same primitives work in any page — and stay small enough for browser extension
   directly. In an extension content script, wrap the tree in your own shadow
   root for isolation from the host page.
 - **State shared via the [W3C Context Protocol](https://github.com/webcomponents-cg/community-protocols/blob/main/proposals/context.md)**,
-  which survives portals — the foundation for Dialog/Popover next.
+  so parts coordinate without DOM coupling — a shared `ContextConsumer` base
+  reused by every primitive.
+- **Platform-first behavior.** Dialog renders in the native top layer via the
+  `popover` API (feature-detected), so it escapes overflow and stacking
+  contexts without portaling the DOM.
 - **Style with data-attributes**, never internal classes:
   `data-open` / `data-closed` / `data-disabled`.
 
@@ -40,9 +44,28 @@ The trigger toggles the panel on click / Enter / Space, wires
 `aria-expanded` + `aria-controls`, and the root emits an `openchange` event.
 Add the `open` attribute for a default-open panel, `disabled` to lock it.
 
-See [`examples/collapsible.html`](examples/collapsible.html) for a styled demo
-(serve the repo root and open it — the import map resolves FAST from
-`node_modules`).
+### Dialog
+
+```html
+<bast-dialog>
+  <bast-dialog-trigger>Open</bast-dialog-trigger>
+  <bast-dialog-backdrop></bast-dialog-backdrop>
+  <bast-dialog-popup>
+    <bast-dialog-title>Title</bast-dialog-title>
+    <bast-dialog-description>Description</bast-dialog-description>
+    <bast-dialog-close>Cancel</bast-dialog-close>
+  </bast-dialog-popup>
+</bast-dialog>
+```
+
+Modal by default (`modal="false"` to opt out). On open it moves focus into the
+popup, traps Tab, wires `aria-modal` / `aria-labelledby` / `aria-describedby`,
+locks body scroll, and marks the background `inert`. It closes on `Escape`,
+backdrop click, or `<bast-dialog-close>`, restoring focus to the trigger.
+
+See [`examples/collapsible.html`](examples/collapsible.html) and
+[`examples/dialog.html`](examples/dialog.html) for styled demos (serve the repo
+root and open them — the import map resolves FAST from `node_modules`).
 
 ## Development
 
@@ -55,6 +78,6 @@ vp pack      # build the library
 
 ## Roadmap
 
-Collapsible is the first vertical slice, proving the composition + shared-state
-architecture. Next: **Dialog** (portal, focus trap, dismiss), **Popover**
-(anchor positioning), **Tabs** (roving tabindex).
+**Collapsible** and **Dialog** are implemented. Next: **Popover** (anchor
+positioning via the CSS Anchor API + `@floating-ui/dom` fallback), **Tabs**
+(roving tabindex), **Menu**, and a thin React wrapper over the same elements.
