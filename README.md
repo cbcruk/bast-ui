@@ -100,7 +100,7 @@ vp pack      # build the library
 
 ## Roadmap
 
-**Collapsible**, **Dialog**, and **Popover** are implemented. Next: **Tabs**
-and **Menu** (roving tabindex), **Tooltip** and **Select** (reusing the
-positioner), an optional `Popover.Arrow`, and a thin React wrapper over the
-same elements.
+**Collapsible**, **Dialog**, and **Popover** are implemented. See
+[`ROADMAP.md`](ROADMAP.md) for the full checklist — next up are **Tabs** and
+**Menu** (roving tabindex), **Tooltip** and **Select** (reusing the
+positioner), and a thin React wrapper over the same elements.
