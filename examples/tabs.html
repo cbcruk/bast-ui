@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>bast-ui · Tabs</title>
+    <script type="importmap">
+      {
+        "imports": {
+          "@microsoft/fast-element": "/node_modules/@microsoft/fast-element/dist/esm/index.js",
+          "@microsoft/fast-element/context.js": "/node_modules/@microsoft/fast-element/dist/esm/context.js"
+        }
+      }
+    </script>
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        max-width: 32rem;
+        margin: 4rem auto;
+        padding: 0 1rem;
+      }
+
+      bast-tabs {
+        display: block;
+      }
+
+      bast-tabs-list {
+        display: flex;
+        gap: 0.25rem;
+        border-bottom: 1px solid #d0d0d0;
+      }
+
+      bast-tabs-tab {
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        user-select: none;
+        border: none;
+        border-bottom: 2px solid transparent;
+        margin-bottom: -1px;
+        color: #555;
+      }
+
+      bast-tabs-tab:focus-visible {
+        outline: 2px solid #3b82f6;
+        outline-offset: 2px;
+        border-radius: 4px;
+      }
+
+      bast-tabs-tab[data-selected] {
+        color: #111;
+        border-bottom-color: #3b82f6;
+        font-weight: 600;
+      }
+
+      bast-tabs-tab[data-disabled] {
+        opacity: 0.4;
+        cursor: not-allowed;
+      }
+
+      bast-tabs-panel {
+        display: block;
+        padding: 1rem 0.25rem;
+        line-height: 1.5;
+      }
+
+      bast-tabs-panel:focus-visible {
+        outline: 2px solid #3b82f6;
+        outline-offset: 2px;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Tabs</h1>
+    <p>
+      Roving tabindex, arrow-key navigation, and ARIA from <code>bast-ui</code>. Styling is driven
+      by <code>data-selected</code> / <code>data-disabled</code>. Automatic activation follows
+      focus; switch <code>activation-mode="manual"</code> to require Enter/Space.
+    </p>
+
+    <bast-tabs value="overview">
+      <bast-tabs-list>
+        <bast-tabs-tab value="overview">Overview</bast-tabs-tab>
+        <bast-tabs-tab value="usage">Usage</bast-tabs-tab>
+        <bast-tabs-tab value="soon" disabled>Coming soon</bast-tabs-tab>
+      </bast-tabs-list>
+
+      <bast-tabs-panel value="overview">
+        Tabs organize content into panels, showing one at a time. Use the arrow keys to move between
+        tabs — focus wraps around, and Home / End jump to the ends.
+      </bast-tabs-panel>
+      <bast-tabs-panel value="usage">
+        Give the root a <code>value</code> to control the selection, or leave it off to default to
+        the first enabled tab. Each tab and panel is linked by a matching <code>value</code>.
+      </bast-tabs-panel>
+      <bast-tabs-panel value="soon">
+        This panel is unreachable — its tab is disabled.
+      </bast-tabs-panel>
+    </bast-tabs>
+
+    <script type="module">
+      import '/dist/index.mjs'
+    </script>
+  </body>
+</html>

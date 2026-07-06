@@ -16,10 +16,11 @@ contract (`data-*` attributes, matching ARIA).
       (modal, focus trap, scroll lock, inert, top layer, dismiss)
 - [x] **Popover** — root / trigger / positioner / popup / title / description / close
       (non-modal, anchor positioning, light dismiss)
+- [x] **Tabs** — root / list / tab / panel (roving tabindex, `aria-selected`,
+      horizontal/vertical orientation, automatic/manual activation)
 
 ## Next primitives
 
-- [ ] **Tabs** — roving tabindex, `aria-selected`, orientation, manual/automatic activation
 - [ ] **Menu** — roving tabindex, typeahead, submenus, reuses the positioner
 - [ ] **Tooltip** — hover/focus intent + delay, reuses the positioner
 - [ ] **Accordion** — Collapsible items with single/multiple expansion

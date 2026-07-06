@@ -8,7 +8,7 @@ Base UI and Radix are excellent but React-only. `bast-ui` mirrors their
 component anatomy and styling contract (`data-open`, `data-closed`,
 `data-disabled`, matching ARIA) as framework-agnostic custom elements, so the
 same primitives work in any page — and stay small enough for browser extensions
-(Collapsible + Dialog + Popover + runtime is ~4.5 kB gzipped).
+(Collapsible + Dialog + Popover + Tabs + runtime is ~5.3 kB gzipped).
 
 ## Design
 
@@ -84,9 +84,32 @@ Non-modal. The positioner anchors the popup to the trigger with `side`,
 stay in view, and exposes the resolved side as `data-side`. It moves focus into
 the popup on open and light-dismisses on outside click or `Escape`.
 
+### Tabs
+
+```html
+<bast-tabs value="overview">
+  <bast-tabs-list>
+    <bast-tabs-tab value="overview">Overview</bast-tabs-tab>
+    <bast-tabs-tab value="usage">Usage</bast-tabs-tab>
+  </bast-tabs-list>
+  <bast-tabs-panel value="overview">Overview content</bast-tabs-panel>
+  <bast-tabs-panel value="usage">Usage content</bast-tabs-panel>
+</bast-tabs>
+```
+
+Roving tabindex over the list: only the selected tab is tabbable, and arrow
+keys move between tabs (Left/Right when `orientation="horizontal"`, the default;
+Up/Down when `"vertical"`), wrapping around, with Home / End jumping to the
+ends. Activation is automatic by default (focus selects); set
+`activation-mode="manual"` to require Enter/Space. Each tab and panel is linked
+by a shared `value`, wiring `role`, `aria-selected`, `aria-controls`, and
+`aria-labelledby`. Omit the root `value` to default to the first enabled tab,
+mark a tab `disabled` to skip it, and the root emits a `valuechange` event.
+
 See [`examples/collapsible.html`](examples/collapsible.html),
-[`examples/dialog.html`](examples/dialog.html), and
-[`examples/popover.html`](examples/popover.html) for styled demos (serve the
+[`examples/dialog.html`](examples/dialog.html),
+[`examples/popover.html`](examples/popover.html), and
+[`examples/tabs.html`](examples/tabs.html) for styled demos (serve the
 repo root and open them — the import map resolves FAST from `node_modules`).
 
 ## Development
@@ -100,7 +123,7 @@ vp pack      # build the library
 
 ## Roadmap
 
-**Collapsible**, **Dialog**, and **Popover** are implemented. See
-[`ROADMAP.md`](ROADMAP.md) for the full checklist — next up are **Tabs** and
-**Menu** (roving tabindex), **Tooltip** and **Select** (reusing the
+**Collapsible**, **Dialog**, **Popover**, and **Tabs** are implemented. See
+[`ROADMAP.md`](ROADMAP.md) for the full checklist — next up are **Menu**
+(roving tabindex, typeahead), **Tooltip** and **Select** (reusing the
 positioner), and a thin React wrapper over the same elements.
