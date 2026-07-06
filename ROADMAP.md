@@ -18,10 +18,13 @@ contract (`data-*` attributes, matching ARIA).
       (non-modal, anchor positioning, light dismiss)
 - [x] **Tabs** — root / list / tab / panel (roving tabindex, `aria-selected`,
       horizontal/vertical orientation, automatic/manual activation)
+- [x] **Menu** — root / trigger / positioner / popup / item (roving focus,
+      arrow-key navigation, typeahead, anchor positioning, light dismiss,
+      focus restore) — submenus still to come
 
 ## Next primitives
 
-- [ ] **Menu** — roving tabindex, typeahead, submenus, reuses the positioner
+- [ ] **Menu submenus** — nested `Menu` items that open on hover / `ArrowRight`
 - [ ] **Tooltip** — hover/focus intent + delay, reuses the positioner
 - [ ] **Accordion** — Collapsible items with single/multiple expansion
 - [ ] **Select / Combobox** — listbox, typeahead, reuses the positioner

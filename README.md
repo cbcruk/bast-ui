@@ -8,7 +8,7 @@ Base UI and Radix are excellent but React-only. `bast-ui` mirrors their
 component anatomy and styling contract (`data-open`, `data-closed`,
 `data-disabled`, matching ARIA) as framework-agnostic custom elements, so the
 same primitives work in any page — and stay small enough for browser extensions
-(Collapsible + Dialog + Popover + Tabs + runtime is ~5.3 kB gzipped).
+(Collapsible + Dialog + Popover + Tabs + Menu + runtime is ~6.4 kB gzipped).
 
 ## Design
 
@@ -106,10 +106,37 @@ by a shared `value`, wiring `role`, `aria-selected`, `aria-controls`, and
 `aria-labelledby`. Omit the root `value` to default to the first enabled tab,
 mark a tab `disabled` to skip it, and the root emits a `valuechange` event.
 
+### Menu
+
+```html
+<bast-menu>
+  <bast-menu-trigger>Actions</bast-menu-trigger>
+  <bast-menu-positioner>
+    <bast-menu-popup>
+      <bast-menu-item value="cut">Cut</bast-menu-item>
+      <bast-menu-item value="copy">Copy</bast-menu-item>
+      <bast-menu-item value="paste" disabled>Paste</bast-menu-item>
+    </bast-menu-popup>
+  </bast-menu-positioner>
+</bast-menu>
+```
+
+A dropdown menu button. The trigger (`aria-haspopup="menu"`) opens on click,
+Enter/Space, or Arrow keys — `ArrowDown` focuses the first item, `ArrowUp` the
+last. Inside the `role="menu"` popup, items take roving focus: arrow keys move
+between them (wrapping), Home / End jump to the ends, and typing focuses the
+next item matching the typed prefix. Selecting an item (click, Enter, or Space)
+emits an `itemselect` event with its `value`, closes the menu, and restores
+focus to the trigger; `Escape`, `Tab`, or an outside click also dismiss it.
+Disabled items are skipped. The positioner anchors the popup with the same
+`side` / `align` / `side-offset` config as Popover, using the native top layer
+when available.
+
 See [`examples/collapsible.html`](examples/collapsible.html),
 [`examples/dialog.html`](examples/dialog.html),
-[`examples/popover.html`](examples/popover.html), and
-[`examples/tabs.html`](examples/tabs.html) for styled demos (serve the
+[`examples/popover.html`](examples/popover.html),
+[`examples/tabs.html`](examples/tabs.html), and
+[`examples/menu.html`](examples/menu.html) for styled demos (serve the
 repo root and open them — the import map resolves FAST from `node_modules`).
 
 ## Development
@@ -123,7 +150,7 @@ vp pack      # build the library
 
 ## Roadmap
 
-**Collapsible**, **Dialog**, **Popover**, and **Tabs** are implemented. See
-[`ROADMAP.md`](ROADMAP.md) for the full checklist — next up are **Menu**
-(roving tabindex, typeahead), **Tooltip** and **Select** (reusing the
-positioner), and a thin React wrapper over the same elements.
+**Collapsible**, **Dialog**, **Popover**, **Tabs**, and **Menu** are
+implemented. See [`ROADMAP.md`](ROADMAP.md) for the full checklist — next up are
+**Menu** submenus, **Tooltip** and **Select** (reusing the positioner), and a
+thin React wrapper over the same elements.
