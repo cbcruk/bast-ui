@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>bast-ui · Tooltip</title>
+    <script type="importmap">
+      {
+        "imports": {
+          "@microsoft/fast-element": "/node_modules/@microsoft/fast-element/dist/esm/index.js",
+          "@microsoft/fast-element/context.js": "/node_modules/@microsoft/fast-element/dist/esm/context.js"
+        }
+      }
+    </script>
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        max-width: 32rem;
+        margin: 4rem auto;
+        padding: 0 1rem;
+      }
+
+      .row {
+        display: flex;
+        gap: 1rem;
+        margin-top: 2rem;
+      }
+
+      bast-tooltip-trigger {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.5rem 0.875rem;
+        border: 1px solid #d0d0d0;
+        border-radius: 8px;
+        cursor: default;
+        user-select: none;
+        font-weight: 600;
+      }
+
+      bast-tooltip-trigger:focus-visible {
+        outline: 2px solid #3b82f6;
+        outline-offset: 2px;
+      }
+
+      bast-tooltip-popup {
+        display: block;
+        max-width: 16rem;
+        padding: 0.375rem 0.625rem;
+        background: #1f2937;
+        color: #fff;
+        font-size: 0.875rem;
+        line-height: 1.4;
+        border-radius: 6px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Opacity/transform transitions can hook into data-open / data-closed. */
+      bast-tooltip-positioner {
+        transition: opacity 120ms ease;
+      }
+
+      bast-tooltip-positioner[data-closed] {
+        opacity: 0;
+      }
+
+      bast-tooltip-positioner[data-open] {
+        opacity: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Tooltip</h1>
+    <p>
+      Shows on hover (after a <code>delay</code>) or on focus (immediately), and hides on pointer
+      leave (after <code>close-delay</code>), blur, or <code>Escape</code>. The trigger gets
+      <code>aria-describedby</code> while open; the popup is <code>role="tooltip"</code>. Hovering
+      the tooltip itself keeps it open. Positioning reuses the same <code>side</code> /
+      <code>align</code> / <code>side-offset</code> config as Popover and Menu.
+    </p>
+
+    <div class="row">
+      <bast-tooltip delay="300" side="top">
+        <bast-tooltip-trigger tabindex="0">Top</bast-tooltip-trigger>
+        <bast-tooltip-positioner>
+          <bast-tooltip-popup
+            >Anchored above the trigger, flipping if there's no room.</bast-tooltip-popup
+          >
+        </bast-tooltip-positioner>
+      </bast-tooltip>
+
+      <bast-tooltip delay="300" side="right">
+        <bast-tooltip-trigger tabindex="0">Right</bast-tooltip-trigger>
+        <bast-tooltip-positioner>
+          <bast-tooltip-popup>This one opens to the right.</bast-tooltip-popup>
+        </bast-tooltip-positioner>
+      </bast-tooltip>
+
+      <bast-tooltip delay="300" side="bottom">
+        <bast-tooltip-trigger tabindex="0">Bottom</bast-tooltip-trigger>
+        <bast-tooltip-positioner>
+          <bast-tooltip-popup>And this one opens below.</bast-tooltip-popup>
+        </bast-tooltip-positioner>
+      </bast-tooltip>
+    </div>
+
+    <script type="module">
+      import '/dist/index.mjs'
+    </script>
+  </body>
+</html>

@@ -8,7 +8,8 @@ Base UI and Radix are excellent but React-only. `bast-ui` mirrors their
 component anatomy and styling contract (`data-open`, `data-closed`,
 `data-disabled`, matching ARIA) as framework-agnostic custom elements, so the
 same primitives work in any page — and stay small enough for browser extensions
-(Collapsible + Dialog + Popover + Tabs + Menu + runtime is ~6.4 kB gzipped).
+(Collapsible + Dialog + Popover + Tabs + Menu + Tooltip + runtime is ~6.9 kB
+gzipped).
 
 ## Design
 
@@ -132,11 +133,32 @@ Disabled items are skipped. The positioner anchors the popup with the same
 `side` / `align` / `side-offset` config as Popover, using the native top layer
 when available.
 
+### Tooltip
+
+```html
+<bast-tooltip delay="600" side="top">
+  <bast-tooltip-trigger tabindex="0">Hover me</bast-tooltip-trigger>
+  <bast-tooltip-positioner>
+    <bast-tooltip-popup>Helpful hint</bast-tooltip-popup>
+  </bast-tooltip-positioner>
+</bast-tooltip>
+```
+
+Shows on pointer hover after `delay` ms (default `600`) and on focus
+immediately; hides on pointer leave after `close-delay` ms (default `0`), on
+blur, or on `Escape`. Hovering the tooltip itself keeps it open. While open the
+trigger gains `aria-describedby` pointing at the `role="tooltip"` popup. The
+positioner anchors the popup with the same `side` / `align` / `side-offset`
+config as Popover and Menu, using the native top layer when available, and
+exposes the resolved side as `data-side`. The trigger must be focusable (give
+it `tabindex="0"` or wrap a focusable element) for the focus behavior.
+
 See [`examples/collapsible.html`](examples/collapsible.html),
 [`examples/dialog.html`](examples/dialog.html),
 [`examples/popover.html`](examples/popover.html),
-[`examples/tabs.html`](examples/tabs.html), and
-[`examples/menu.html`](examples/menu.html) for styled demos (serve the
+[`examples/tabs.html`](examples/tabs.html),
+[`examples/menu.html`](examples/menu.html), and
+[`examples/tooltip.html`](examples/tooltip.html) for styled demos (serve the
 repo root and open them — the import map resolves FAST from `node_modules`).
 
 ## Development
@@ -150,7 +172,7 @@ vp pack      # build the library
 
 ## Roadmap
 
-**Collapsible**, **Dialog**, **Popover**, **Tabs**, and **Menu** are
-implemented. See [`ROADMAP.md`](ROADMAP.md) for the full checklist — next up are
-**Menu** submenus, **Tooltip** and **Select** (reusing the positioner), and a
+**Collapsible**, **Dialog**, **Popover**, **Tabs**, **Menu**, and **Tooltip**
+are implemented. See [`ROADMAP.md`](ROADMAP.md) for the full checklist — next up
+are **Menu** submenus, **Accordion**, **Select** (reusing the positioner), and a
 thin React wrapper over the same elements.

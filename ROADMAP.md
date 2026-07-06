@@ -21,11 +21,13 @@ contract (`data-*` attributes, matching ARIA).
 - [x] **Menu** — root / trigger / positioner / popup / item (roving focus,
       arrow-key navigation, typeahead, anchor positioning, light dismiss,
       focus restore) — submenus still to come
+- [x] **Tooltip** — root / trigger / positioner / popup (hover/focus intent,
+      open/close delays, `aria-describedby`, anchor positioning, hoverable,
+      `Escape` dismiss)
 
 ## Next primitives
 
 - [ ] **Menu submenus** — nested `Menu` items that open on hover / `ArrowRight`
-- [ ] **Tooltip** — hover/focus intent + delay, reuses the positioner
 - [ ] **Accordion** — Collapsible items with single/multiple expansion
 - [ ] **Select / Combobox** — listbox, typeahead, reuses the positioner
 - [ ] **Switch / Checkbox / Radio Group** — form primitives, `aria-checked`
