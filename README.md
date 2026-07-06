@@ -9,7 +9,8 @@ component anatomy and styling contract (`data-open`, `data-closed`,
 `data-disabled`, matching ARIA) as framework-agnostic custom elements, so the
 same primitives work in any page — and stay small enough for browser extensions
 (the full set — Collapsible, Dialog, Popover, Tabs, Menu, Tooltip, Accordion,
-Switch, Checkbox, Radio Group, Select — plus runtime is ~9.8 kB gzipped).
+Switch, Checkbox, Radio Group, Select, Toast — plus runtime is ~10.7 kB
+gzipped).
 
 ## Design
 
@@ -236,6 +237,30 @@ the selected option's label (or its `placeholder`, marked `data-placeholder`).
 Disabled options are skipped, and a `disabled` root won't open. Positioning
 reuses the same `side` / `align` / `side-offset` config as Popover and Menu.
 
+### Toast
+
+```html
+<bast-toast-region>
+  <bast-toast open duration="5000">
+    <bast-toast-title>Saved</bast-toast-title>
+    <bast-toast-description>Your changes were saved.</bast-toast-description>
+    <bast-toast-close aria-label="Dismiss">✕</bast-toast-close>
+  </bast-toast>
+</bast-toast-region>
+```
+
+A self-managing toast. While `open`, it auto-dismisses after `duration` ms
+(default `5000`; `0` disables), and the timer pauses while the toast is hovered
+or focused and resumes on leave/blur. It emits `openchange` when it dismisses —
+listen for that to remove it from the DOM (after your exit transition). Setting
+the `open` attribute or property shows it, so the same element works
+declaratively or driven from script. A background toast (default) is a polite
+`role="status"` live region; `type="foreground"` makes it an assertive
+`role="alert"`. `bast-toast-title` / `bast-toast-description` wire
+`aria-labelledby` / `aria-describedby`, `bast-toast-close` dismisses, and
+`bast-toast-region` is the labelled `role="region"` landmark that holds the
+stack. Style entrance/exit via `data-open` / `data-closed`.
+
 See [`examples/collapsible.html`](examples/collapsible.html),
 [`examples/dialog.html`](examples/dialog.html),
 [`examples/popover.html`](examples/popover.html),
@@ -243,8 +268,9 @@ See [`examples/collapsible.html`](examples/collapsible.html),
 [`examples/menu.html`](examples/menu.html),
 [`examples/tooltip.html`](examples/tooltip.html),
 [`examples/accordion.html`](examples/accordion.html),
-[`examples/forms.html`](examples/forms.html), and
-[`examples/select.html`](examples/select.html) for styled demos (serve the
+[`examples/forms.html`](examples/forms.html),
+[`examples/select.html`](examples/select.html), and
+[`examples/toast.html`](examples/toast.html) for styled demos (serve the
 repo root and open them — the import map resolves FAST from `node_modules`).
 
 ## Development
@@ -259,7 +285,7 @@ vp pack      # build the library
 ## Roadmap
 
 **Collapsible**, **Dialog**, **Popover**, **Tabs**, **Menu**, **Tooltip**,
-**Accordion**, **Switch**, **Checkbox**, **Radio Group**, and **Select** are
-implemented. See [`ROADMAP.md`](ROADMAP.md) for the full checklist — next up are
-**Combobox** (editable Select), **Menu** submenus, **Toast**, and a thin React
-wrapper over the same elements.
+**Accordion**, **Switch**, **Checkbox**, **Radio Group**, **Select**, and
+**Toast** are implemented. See [`ROADMAP.md`](ROADMAP.md) for the full checklist
+— next up are a **Toast** queue/manager, **Combobox** (editable Select),
+**Menu** submenus, and a thin React wrapper over the same elements.

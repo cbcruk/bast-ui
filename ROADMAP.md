@@ -32,12 +32,16 @@ contract (`data-*` attributes, matching ARIA).
 - [x] **Select** — root / trigger / value / positioner / popup / option
       (`role="listbox"`, roving focus, typeahead, anchor positioning, selected
       label, light dismiss, focus restore)
+- [x] **Toast** — region / root / title / description / close (`role="status"` or
+      `alert` live region, timed auto-dismiss that pauses on hover/focus,
+      `aria-labelledby` / `aria-describedby`)
 
 ## Next primitives
 
+- [ ] **Toast queue/manager** — imperative `add()` API + stacking/limit on top
+      of the declarative `bast-toast`
 - [ ] **Combobox** — editable text input variant of Select (filtering)
 - [ ] **Menu submenus** — nested `Menu` items that open on hover / `ArrowRight`
-- [ ] **Toast** — region + queue, timed dismissal
 
 ## Cross-cutting
 
