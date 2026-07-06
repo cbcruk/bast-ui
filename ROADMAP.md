@@ -29,11 +29,14 @@ contract (`data-*` attributes, matching ARIA).
 - [x] **Switch / Checkbox / Radio Group** — `aria-checked` form primitives
       (Switch + Checkbox share a toggle base; Checkbox adds indeterminate; Radio
       Group has roving tabindex + arrow selection)
+- [x] **Select** — root / trigger / value / positioner / popup / option
+      (`role="listbox"`, roving focus, typeahead, anchor positioning, selected
+      label, light dismiss, focus restore)
 
 ## Next primitives
 
+- [ ] **Combobox** — editable text input variant of Select (filtering)
 - [ ] **Menu submenus** — nested `Menu` items that open on hover / `ArrowRight`
-- [ ] **Select / Combobox** — listbox, typeahead, reuses the positioner
 - [ ] **Toast** — region + queue, timed dismissal
 
 ## Cross-cutting

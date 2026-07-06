@@ -9,7 +9,7 @@ component anatomy and styling contract (`data-open`, `data-closed`,
 `data-disabled`, matching ARIA) as framework-agnostic custom elements, so the
 same primitives work in any page — and stay small enough for browser extensions
 (the full set — Collapsible, Dialog, Popover, Tabs, Menu, Tooltip, Accordion,
-Switch, Checkbox, Radio Group — plus runtime is ~8.7 kB gzipped).
+Switch, Checkbox, Radio Group, Select — plus runtime is ~9.8 kB gzipped).
 
 ## Design
 
@@ -207,14 +207,44 @@ Home / End. All three honor `disabled` (per-radio and whole-group), skipping
 disabled radios during navigation. Form submission via `ElementInternals` is on
 the roadmap — for now, read state from the element or the change events.
 
+### Select
+
+```html
+<bast-select value="green">
+  <bast-select-trigger>
+    <bast-select-value placeholder="Pick a color"></bast-select-value>
+  </bast-select-trigger>
+  <bast-select-positioner>
+    <bast-select-popup>
+      <bast-select-option value="red">Red</bast-select-option>
+      <bast-select-option value="green">Green</bast-select-option>
+      <bast-select-option value="blue">Blue</bast-select-option>
+    </bast-select-popup>
+  </bast-select-positioner>
+</bast-select>
+```
+
+A listbox select. The trigger (`role="combobox"`, `aria-haspopup="listbox"`)
+opens on click, Enter/Space, or Arrow keys. Inside the `role="listbox"` popup,
+options (`role="option"`, `aria-selected`) take roving focus — arrow keys
+navigate with wraparound, Home / End jump to the ends, and typing focuses the
+next option matching the prefix; opening focuses the currently selected option
+(or the first). Choosing an option (click, Enter, or Space) sets the root
+`value`, emits `valuechange`, closes, and restores focus to the trigger;
+`Escape`, `Tab`, or an outside click also dismiss. `bast-select-value` renders
+the selected option's label (or its `placeholder`, marked `data-placeholder`).
+Disabled options are skipped, and a `disabled` root won't open. Positioning
+reuses the same `side` / `align` / `side-offset` config as Popover and Menu.
+
 See [`examples/collapsible.html`](examples/collapsible.html),
 [`examples/dialog.html`](examples/dialog.html),
 [`examples/popover.html`](examples/popover.html),
 [`examples/tabs.html`](examples/tabs.html),
 [`examples/menu.html`](examples/menu.html),
 [`examples/tooltip.html`](examples/tooltip.html),
-[`examples/accordion.html`](examples/accordion.html), and
-[`examples/forms.html`](examples/forms.html) for styled demos (serve the
+[`examples/accordion.html`](examples/accordion.html),
+[`examples/forms.html`](examples/forms.html), and
+[`examples/select.html`](examples/select.html) for styled demos (serve the
 repo root and open them — the import map resolves FAST from `node_modules`).
 
 ## Development
@@ -229,7 +259,7 @@ vp pack      # build the library
 ## Roadmap
 
 **Collapsible**, **Dialog**, **Popover**, **Tabs**, **Menu**, **Tooltip**,
-**Accordion**, **Switch**, **Checkbox**, and **Radio Group** are implemented. See
-[`ROADMAP.md`](ROADMAP.md) for the full checklist — next up are **Menu**
-submenus, **Select** / **Combobox** (reusing the positioner), **Toast**, and a
-thin React wrapper over the same elements.
+**Accordion**, **Switch**, **Checkbox**, **Radio Group**, and **Select** are
+implemented. See [`ROADMAP.md`](ROADMAP.md) for the full checklist — next up are
+**Combobox** (editable Select), **Menu** submenus, **Toast**, and a thin React
+wrapper over the same elements.
