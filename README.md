@@ -8,8 +8,8 @@ Base UI and Radix are excellent but React-only. `bast-ui` mirrors their
 component anatomy and styling contract (`data-open`, `data-closed`,
 `data-disabled`, matching ARIA) as framework-agnostic custom elements, so the
 same primitives work in any page — and stay small enough for browser extensions
-(Collapsible + Dialog + Popover + Tabs + Menu + Tooltip + runtime is ~6.9 kB
-gzipped).
+(Collapsible + Dialog + Popover + Tabs + Menu + Tooltip + Accordion + runtime is
+~7.6 kB gzipped).
 
 ## Design
 
@@ -153,12 +153,39 @@ config as Popover and Menu, using the native top layer when available, and
 exposes the resolved side as `data-side`. The trigger must be focusable (give
 it `tabindex="0"` or wrap a focusable element) for the focus behavior.
 
+### Accordion
+
+```html
+<bast-accordion value="what">
+  <bast-accordion-item value="what">
+    <bast-accordion-trigger>What is bast-ui?</bast-accordion-trigger>
+    <bast-accordion-panel>A headless web-component layer.</bast-accordion-panel>
+  </bast-accordion-item>
+  <bast-accordion-item value="how">
+    <bast-accordion-trigger>How do I style it?</bast-accordion-trigger>
+    <bast-accordion-panel>With data-attributes.</bast-accordion-panel>
+  </bast-accordion-item>
+</bast-accordion>
+```
+
+Collapsible items sharing one root. Each item is keyed by a `value`; the root's
+`value` holds the open item(s) as a comma-separated list (`value="what,how"`)
+and emits `valuechange` with the open values as an array. Single-expansion by
+default — opening one collapses the rest; add `multiple` to allow several open
+at once. Triggers stay in the tab order (not roving) and wire `aria-expanded` /
+`aria-controls`; arrow keys move focus between headers (Up/Down, or Left/Right
+under `orientation="horizontal"`), wrapping, with Home / End jumping to the
+ends. Mark an item `disabled` (or the whole root) to lock it — disabled items
+are skipped by navigation. Style with `data-open` / `data-closed` /
+`data-disabled`.
+
 See [`examples/collapsible.html`](examples/collapsible.html),
 [`examples/dialog.html`](examples/dialog.html),
 [`examples/popover.html`](examples/popover.html),
 [`examples/tabs.html`](examples/tabs.html),
-[`examples/menu.html`](examples/menu.html), and
-[`examples/tooltip.html`](examples/tooltip.html) for styled demos (serve the
+[`examples/menu.html`](examples/menu.html),
+[`examples/tooltip.html`](examples/tooltip.html), and
+[`examples/accordion.html`](examples/accordion.html) for styled demos (serve the
 repo root and open them — the import map resolves FAST from `node_modules`).
 
 ## Development
@@ -172,7 +199,8 @@ vp pack      # build the library
 
 ## Roadmap
 
-**Collapsible**, **Dialog**, **Popover**, **Tabs**, **Menu**, and **Tooltip**
-are implemented. See [`ROADMAP.md`](ROADMAP.md) for the full checklist — next up
-are **Menu** submenus, **Accordion**, **Select** (reusing the positioner), and a
-thin React wrapper over the same elements.
+**Collapsible**, **Dialog**, **Popover**, **Tabs**, **Menu**, **Tooltip**, and
+**Accordion** are implemented. See [`ROADMAP.md`](ROADMAP.md) for the full
+checklist — next up are **Menu** submenus, **Select** (reusing the positioner),
+form primitives (**Switch** / **Checkbox** / **Radio Group**), and a thin React
+wrapper over the same elements.

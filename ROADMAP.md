@@ -24,11 +24,12 @@ contract (`data-*` attributes, matching ARIA).
 - [x] **Tooltip** — root / trigger / positioner / popup (hover/focus intent,
       open/close delays, `aria-describedby`, anchor positioning, hoverable,
       `Escape` dismiss)
+- [x] **Accordion** — root / item / trigger / panel (single/multiple expansion,
+      `value` list, arrow-key header navigation, per-item + root `disabled`)
 
 ## Next primitives
 
 - [ ] **Menu submenus** — nested `Menu` items that open on hover / `ArrowRight`
-- [ ] **Accordion** — Collapsible items with single/multiple expansion
 - [ ] **Select / Combobox** — listbox, typeahead, reuses the positioner
 - [ ] **Switch / Checkbox / Radio Group** — form primitives, `aria-checked`
 - [ ] **Toast** — region + queue, timed dismissal

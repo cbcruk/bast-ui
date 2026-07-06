@@ -1,0 +1,11 @@
+import './accordion.ts'
+import './accordion-item.ts'
+import './accordion-trigger.ts'
+import './accordion-panel.ts'
+
+export { AccordionRoot } from './accordion.ts'
+export { AccordionItem } from './accordion-item.ts'
+export { AccordionTrigger } from './accordion-trigger.ts'
+export { AccordionPanel } from './accordion-panel.ts'
+export { AccordionContext, type AccordionContextValue } from './accordion.context.ts'
+export type { AccordionOrientation, AccordionValueChangeDetail } from './accordion.types.ts'
