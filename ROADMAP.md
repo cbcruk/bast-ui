@@ -26,12 +26,14 @@ contract (`data-*` attributes, matching ARIA).
       `Escape` dismiss)
 - [x] **Accordion** — root / item / trigger / panel (single/multiple expansion,
       `value` list, arrow-key header navigation, per-item + root `disabled`)
+- [x] **Switch / Checkbox / Radio Group** — `aria-checked` form primitives
+      (Switch + Checkbox share a toggle base; Checkbox adds indeterminate; Radio
+      Group has roving tabindex + arrow selection)
 
 ## Next primitives
 
 - [ ] **Menu submenus** — nested `Menu` items that open on hover / `ArrowRight`
 - [ ] **Select / Combobox** — listbox, typeahead, reuses the positioner
-- [ ] **Switch / Checkbox / Radio Group** — form primitives, `aria-checked`
 - [ ] **Toast** — region + queue, timed dismissal
 
 ## Cross-cutting
@@ -39,6 +41,8 @@ contract (`data-*` attributes, matching ARIA).
 - [ ] **Controlled vs uncontrolled** — support both `open` (controlled) and
       `default-open`, consistently across primitives
 - [ ] **`Popover.Arrow` / `Dialog` arrow** — positioned arrow element
+- [ ] **Form association** — `ElementInternals` `name` / `value` submission for
+      Switch / Checkbox / Radio Group (currently state + events only)
 - [ ] **Animation hooks** — keep elements mounted during exit (`data-closed`
       transition window) before hiding
 - [ ] **RTL** — mirror `align` / side logic under `dir="rtl"`

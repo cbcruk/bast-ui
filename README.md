@@ -8,8 +8,8 @@ Base UI and Radix are excellent but React-only. `bast-ui` mirrors their
 component anatomy and styling contract (`data-open`, `data-closed`,
 `data-disabled`, matching ARIA) as framework-agnostic custom elements, so the
 same primitives work in any page — and stay small enough for browser extensions
-(Collapsible + Dialog + Popover + Tabs + Menu + Tooltip + Accordion + runtime is
-~7.6 kB gzipped).
+(the full set — Collapsible, Dialog, Popover, Tabs, Menu, Tooltip, Accordion,
+Switch, Checkbox, Radio Group — plus runtime is ~8.7 kB gzipped).
 
 ## Design
 
@@ -179,13 +179,42 @@ ends. Mark an item `disabled` (or the whole root) to lock it — disabled items
 are skipped by navigation. Style with `data-open` / `data-closed` /
 `data-disabled`.
 
+### Switch, Checkbox & Radio Group
+
+```html
+<bast-switch></bast-switch>
+
+<bast-checkbox></bast-checkbox>
+<bast-checkbox indeterminate></bast-checkbox>
+
+<bast-radio-group value="md" aria-label="Size">
+  <bast-radio value="sm"></bast-radio>
+  <bast-radio value="md"></bast-radio>
+  <bast-radio value="lg"></bast-radio>
+</bast-radio-group>
+```
+
+Form controls that carry state and ARIA but no built-in styling. **Switch**
+(`role="switch"`) and **Checkbox** (`role="checkbox"`) toggle on click or Space,
+reflect `aria-checked` and `data-checked` / `data-unchecked`, and emit
+`checkedchange`; Checkbox also supports `indeterminate` (`aria-checked="mixed"`,
+`data-indeterminate`), which a click resolves to checked. **Radio Group**
+(`role="radiogroup"`) tracks the selected `value` and emits `valuechange`; its
+radios use roving tabindex (only the checked one — or the first when none is
+selected — is tabbable) and arrow keys move focus **and** selection together
+(Up/Down, or Left/Right under `orientation="horizontal"`), wrapping, with
+Home / End. All three honor `disabled` (per-radio and whole-group), skipping
+disabled radios during navigation. Form submission via `ElementInternals` is on
+the roadmap — for now, read state from the element or the change events.
+
 See [`examples/collapsible.html`](examples/collapsible.html),
 [`examples/dialog.html`](examples/dialog.html),
 [`examples/popover.html`](examples/popover.html),
 [`examples/tabs.html`](examples/tabs.html),
 [`examples/menu.html`](examples/menu.html),
-[`examples/tooltip.html`](examples/tooltip.html), and
-[`examples/accordion.html`](examples/accordion.html) for styled demos (serve the
+[`examples/tooltip.html`](examples/tooltip.html),
+[`examples/accordion.html`](examples/accordion.html), and
+[`examples/forms.html`](examples/forms.html) for styled demos (serve the
 repo root and open them — the import map resolves FAST from `node_modules`).
 
 ## Development
@@ -199,8 +228,8 @@ vp pack      # build the library
 
 ## Roadmap
 
-**Collapsible**, **Dialog**, **Popover**, **Tabs**, **Menu**, **Tooltip**, and
-**Accordion** are implemented. See [`ROADMAP.md`](ROADMAP.md) for the full
-checklist — next up are **Menu** submenus, **Select** (reusing the positioner),
-form primitives (**Switch** / **Checkbox** / **Radio Group**), and a thin React
-wrapper over the same elements.
+**Collapsible**, **Dialog**, **Popover**, **Tabs**, **Menu**, **Tooltip**,
+**Accordion**, **Switch**, **Checkbox**, and **Radio Group** are implemented. See
+[`ROADMAP.md`](ROADMAP.md) for the full checklist — next up are **Menu**
+submenus, **Select** / **Combobox** (reusing the positioner), **Toast**, and a
+thin React wrapper over the same elements.
