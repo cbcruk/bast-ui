@@ -294,7 +294,14 @@ vp install   # install dependencies
 vp test      # run unit tests (happy-dom)
 vp check     # format, lint, type check
 vp pack      # build the library
+vp run cem   # regenerate custom-elements.json
 ```
+
+The package ships a [Custom Elements Manifest](https://github.com/webcomponents/custom-elements-manifest)
+(`custom-elements.json`, referenced by the `customElements` field) describing
+every element's tag name and attributes, so editors and doc tools get
+autocomplete and hovers. Regenerate it with `vp run cem` after changing a
+primitive's anatomy or attributes.
 
 ## Roadmap
 

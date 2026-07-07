@@ -62,7 +62,8 @@ contract (`data-*` attributes, matching ARIA).
 
 - [x] **Per-primitive entry points** — `bast-ui/dialog` etc. for tree-shaking
       (one subpath export per primitive; shared runtime split into chunks)
-- [ ] **Custom Elements Manifest** — generate `custom-elements.json` for IDE/docs
+- [x] **Custom Elements Manifest** — generate `custom-elements.json` for IDE/docs
+      (`vp run cem`; a plugin teaches the analyzer FAST's `.define()` convention)
 - [ ] **React wrapper** — thin `@lit-labs/react`-style bindings over the same elements
 - [ ] **Docs site** — anatomy, props/attributes, styling recipes, a11y notes
 - [ ] **First npm release** — set version, changesets, publish
