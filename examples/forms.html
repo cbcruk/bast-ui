@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>bast-ui · Form primitives</title>
+    <script type="importmap">
+      {
+        "imports": {
+          "@microsoft/fast-element": "/node_modules/@microsoft/fast-element/dist/esm/index.js",
+          "@microsoft/fast-element/context.js": "/node_modules/@microsoft/fast-element/dist/esm/context.js"
+        }
+      }
+    </script>
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        max-width: 32rem;
+        margin: 4rem auto;
+        padding: 0 1rem;
+        line-height: 1.5;
+      }
+
+      section {
+        margin: 2rem 0;
+      }
+
+      label {
+        display: flex;
+        align-items: center;
+        gap: 0.625rem;
+        cursor: pointer;
+        user-select: none;
+      }
+
+      /* Switch */
+      bast-switch {
+        display: inline-flex;
+        width: 2.5rem;
+        height: 1.5rem;
+        padding: 2px;
+        background: #cbd5e1;
+        border-radius: 999px;
+        transition: background 150ms ease;
+      }
+
+      bast-switch::after {
+        content: '';
+        width: 1.25rem;
+        height: 1.25rem;
+        background: #fff;
+        border-radius: 50%;
+        transition: transform 150ms ease;
+      }
+
+      bast-switch[data-checked] {
+        background: #3b82f6;
+      }
+
+      bast-switch[data-checked]::after {
+        transform: translateX(1rem);
+      }
+
+      /* Checkbox */
+      bast-checkbox {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 1.25rem;
+        height: 1.25rem;
+        border: 2px solid #94a3b8;
+        border-radius: 4px;
+        color: #fff;
+        font-size: 0.8rem;
+      }
+
+      bast-checkbox[data-checked],
+      bast-checkbox[data-indeterminate] {
+        background: #3b82f6;
+        border-color: #3b82f6;
+      }
+
+      bast-checkbox[data-checked]::after {
+        content: '✓';
+      }
+
+      bast-checkbox[data-indeterminate]::after {
+        content: '–';
+      }
+
+      /* Radio group */
+      bast-radio-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      bast-radio {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 1.25rem;
+        height: 1.25rem;
+        border: 2px solid #94a3b8;
+        border-radius: 50%;
+      }
+
+      bast-radio[data-checked]::after {
+        content: '';
+        width: 0.625rem;
+        height: 0.625rem;
+        background: #3b82f6;
+        border-radius: 50%;
+      }
+
+      bast-radio[data-checked] {
+        border-color: #3b82f6;
+      }
+
+      :is(bast-switch, bast-checkbox, bast-radio):focus-visible {
+        outline: 2px solid #3b82f6;
+        outline-offset: 2px;
+      }
+
+      [data-disabled] {
+        opacity: 0.45;
+        cursor: not-allowed;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Form primitives</h1>
+    <p>
+      Headless <code>Switch</code>, <code>Checkbox</code>, and <code>Radio Group</code> — state and
+      ARIA (<code>aria-checked</code>) from <code>bast-ui</code>, all styling driven by
+      <code>data-checked</code> / <code>data-unchecked</code> / <code>data-indeterminate</code> /
+      <code>data-disabled</code>.
+    </p>
+
+    <section>
+      <h2>Switch</h2>
+      <label><bast-switch></bast-switch> Enable notifications</label>
+    </section>
+
+    <section>
+      <h2>Checkbox</h2>
+      <label><bast-checkbox></bast-checkbox> Accept terms</label>
+      <label><bast-checkbox indeterminate></bast-checkbox> Select all (indeterminate)</label>
+      <label><bast-checkbox checked disabled></bast-checkbox> Locked on</label>
+    </section>
+
+    <section>
+      <h2>Radio Group</h2>
+      <bast-radio-group value="md" aria-label="Size">
+        <label><bast-radio value="sm"></bast-radio> Small</label>
+        <label><bast-radio value="md"></bast-radio> Medium</label>
+        <label><bast-radio value="lg"></bast-radio> Large</label>
+      </bast-radio-group>
+    </section>
+
+    <script type="module">
+      import '/dist/index.mjs'
+    </script>
+  </body>
+</html>

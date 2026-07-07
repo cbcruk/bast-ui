@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>bast-ui · Menu</title>
+    <script type="importmap">
+      {
+        "imports": {
+          "@microsoft/fast-element": "/node_modules/@microsoft/fast-element/dist/esm/index.js",
+          "@microsoft/fast-element/context.js": "/node_modules/@microsoft/fast-element/dist/esm/context.js"
+        }
+      }
+    </script>
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        max-width: 32rem;
+        margin: 4rem auto;
+        padding: 0 1rem;
+      }
+
+      bast-menu-trigger {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.375rem;
+        padding: 0.5rem 0.875rem;
+        border: 1px solid #d0d0d0;
+        border-radius: 8px;
+        cursor: pointer;
+        user-select: none;
+        font-weight: 600;
+      }
+
+      bast-menu-trigger::after {
+        content: '▾';
+      }
+
+      bast-menu-trigger:focus-visible {
+        outline: 2px solid #3b82f6;
+        outline-offset: 2px;
+      }
+
+      bast-menu-positioner {
+        /* position: fixed and coordinates are set by the positioner */
+      }
+
+      bast-menu-popup {
+        display: block;
+        min-width: 12rem;
+        padding: 0.375rem;
+        background: #fff;
+        border: 1px solid #d0d0d0;
+        border-radius: 8px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+      }
+
+      bast-menu-item {
+        display: block;
+        padding: 0.5rem 0.625rem;
+        border-radius: 6px;
+        cursor: pointer;
+        user-select: none;
+      }
+
+      bast-menu-item:focus-visible {
+        outline: none;
+        background: #eff4ff;
+      }
+
+      bast-menu-item[data-disabled] {
+        opacity: 0.4;
+        cursor: not-allowed;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Menu</h1>
+    <p>
+      A dropdown menu button. The trigger opens on click, Enter/Space, or Arrow keys; items support
+      roving focus, arrow-key navigation, Home/End, and typeahead. Selecting an item closes the menu
+      and returns focus to the trigger. Styling is driven by <code>data-disabled</code> and
+      <code>:focus-visible</code>.
+    </p>
+
+    <bast-menu>
+      <bast-menu-trigger>Actions</bast-menu-trigger>
+      <bast-menu-positioner>
+        <bast-menu-popup>
+          <bast-menu-item value="cut">Cut</bast-menu-item>
+          <bast-menu-item value="copy">Copy</bast-menu-item>
+          <bast-menu-item value="paste" disabled>Paste</bast-menu-item>
+          <bast-menu-item value="delete">Delete</bast-menu-item>
+        </bast-menu-popup>
+      </bast-menu-positioner>
+    </bast-menu>
+
+    <p id="log" aria-live="polite" style="color: #555"></p>
+
+    <script type="module">
+      import '/dist/index.mjs'
+
+      const menu = document.querySelector('bast-menu')
+      const log = document.getElementById('log')
+      menu.addEventListener('itemselect', (event) => {
+        log.textContent = `Selected: ${event.detail.value}`
+      })
+    </script>
+  </body>
+</html>

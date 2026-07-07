@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>bast-ui · Select</title>
+    <script type="importmap">
+      {
+        "imports": {
+          "@microsoft/fast-element": "/node_modules/@microsoft/fast-element/dist/esm/index.js",
+          "@microsoft/fast-element/context.js": "/node_modules/@microsoft/fast-element/dist/esm/context.js"
+        }
+      }
+    </script>
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        max-width: 32rem;
+        margin: 4rem auto;
+        padding: 0 1rem;
+      }
+
+      bast-select-trigger {
+        display: inline-flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.5rem;
+        min-width: 12rem;
+        padding: 0.5rem 0.75rem;
+        border: 1px solid #d0d0d0;
+        border-radius: 8px;
+        cursor: default;
+        user-select: none;
+      }
+
+      bast-select-trigger::after {
+        content: '▾';
+        color: #666;
+      }
+
+      bast-select-trigger:focus-visible {
+        outline: 2px solid #3b82f6;
+        outline-offset: 2px;
+      }
+
+      bast-select-value[data-placeholder] {
+        color: #9ca3af;
+      }
+
+      bast-select-popup {
+        display: block;
+        min-width: 12rem;
+        padding: 0.375rem;
+        background: #fff;
+        border: 1px solid #d0d0d0;
+        border-radius: 8px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+      }
+
+      bast-select-option {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.5rem 0.625rem;
+        border-radius: 6px;
+        cursor: default;
+        user-select: none;
+      }
+
+      bast-select-option:focus-visible {
+        outline: none;
+        background: #eff4ff;
+      }
+
+      bast-select-option[data-selected]::after {
+        content: '✓';
+        color: #3b82f6;
+      }
+
+      bast-select-option[data-disabled] {
+        opacity: 0.4;
+        cursor: not-allowed;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Select</h1>
+    <p>
+      A listbox select. The trigger (<code>role="combobox"</code>) opens on click, Enter/Space, or
+      Arrow keys; options take roving focus with arrow navigation, Home/End, and typeahead. Choosing
+      an option updates <code>bast-select-value</code>, closes the listbox, and restores focus to
+      the trigger. Style with <code>data-selected</code> / <code>data-disabled</code>.
+    </p>
+
+    <bast-select value="green">
+      <bast-select-trigger>
+        <bast-select-value placeholder="Pick a color"></bast-select-value>
+      </bast-select-trigger>
+      <bast-select-positioner>
+        <bast-select-popup>
+          <bast-select-option value="red">Red</bast-select-option>
+          <bast-select-option value="green">Green</bast-select-option>
+          <bast-select-option value="blue">Blue</bast-select-option>
+          <bast-select-option value="violet" disabled>Violet (out of stock)</bast-select-option>
+        </bast-select-popup>
+      </bast-select-positioner>
+    </bast-select>
+
+    <p id="log" aria-live="polite" style="color: #555"></p>
+
+    <script type="module">
+      import '/dist/index.mjs'
+
+      const select = document.querySelector('bast-select')
+      const log = document.getElementById('log')
+      select.addEventListener('valuechange', (event) => {
+        log.textContent = `Selected: ${event.detail.value}`
+      })
+    </script>
+  </body>
+</html>

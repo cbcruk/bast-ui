@@ -16,22 +16,40 @@ contract (`data-*` attributes, matching ARIA).
       (modal, focus trap, scroll lock, inert, top layer, dismiss)
 - [x] **Popover** — root / trigger / positioner / popup / title / description / close
       (non-modal, anchor positioning, light dismiss)
+- [x] **Tabs** — root / list / tab / panel (roving tabindex, `aria-selected`,
+      horizontal/vertical orientation, automatic/manual activation)
+- [x] **Menu** — root / trigger / positioner / popup / item (roving focus,
+      arrow-key navigation, typeahead, anchor positioning, light dismiss,
+      focus restore) — submenus still to come
+- [x] **Tooltip** — root / trigger / positioner / popup (hover/focus intent,
+      open/close delays, `aria-describedby`, anchor positioning, hoverable,
+      `Escape` dismiss)
+- [x] **Accordion** — root / item / trigger / panel (single/multiple expansion,
+      `value` list, arrow-key header navigation, per-item + root `disabled`)
+- [x] **Switch / Checkbox / Radio Group** — `aria-checked` form primitives
+      (Switch + Checkbox share a toggle base; Checkbox adds indeterminate; Radio
+      Group has roving tabindex + arrow selection)
+- [x] **Select** — root / trigger / value / positioner / popup / option
+      (`role="listbox"`, roving focus, typeahead, anchor positioning, selected
+      label, light dismiss, focus restore)
+- [x] **Toast** — region / root / title / description / close (`role="status"` or
+      `alert` live region, timed auto-dismiss that pauses on hover/focus,
+      `aria-labelledby` / `aria-describedby`)
 
 ## Next primitives
 
-- [ ] **Tabs** — roving tabindex, `aria-selected`, orientation, manual/automatic activation
-- [ ] **Menu** — roving tabindex, typeahead, submenus, reuses the positioner
-- [ ] **Tooltip** — hover/focus intent + delay, reuses the positioner
-- [ ] **Accordion** — Collapsible items with single/multiple expansion
-- [ ] **Select / Combobox** — listbox, typeahead, reuses the positioner
-- [ ] **Switch / Checkbox / Radio Group** — form primitives, `aria-checked`
-- [ ] **Toast** — region + queue, timed dismissal
+- [ ] **Toast queue/manager** — imperative `add()` API + stacking/limit on top
+      of the declarative `bast-toast`
+- [ ] **Combobox** — editable text input variant of Select (filtering)
+- [ ] **Menu submenus** — nested `Menu` items that open on hover / `ArrowRight`
 
 ## Cross-cutting
 
 - [ ] **Controlled vs uncontrolled** — support both `open` (controlled) and
       `default-open`, consistently across primitives
 - [ ] **`Popover.Arrow` / `Dialog` arrow** — positioned arrow element
+- [ ] **Form association** — `ElementInternals` `name` / `value` submission for
+      Switch / Checkbox / Radio Group (currently state + events only)
 - [ ] **Animation hooks** — keep elements mounted during exit (`data-closed`
       transition window) before hiding
 - [ ] **RTL** — mirror `align` / side logic under `dir="rtl"`
@@ -42,8 +60,10 @@ contract (`data-*` attributes, matching ARIA).
 
 ## Packaging & DX
 
-- [ ] **Per-primitive entry points** — `bast-ui/dialog` etc. for tree-shaking
-- [ ] **Custom Elements Manifest** — generate `custom-elements.json` for IDE/docs
+- [x] **Per-primitive entry points** — `bast-ui/dialog` etc. for tree-shaking
+      (one subpath export per primitive; shared runtime split into chunks)
+- [x] **Custom Elements Manifest** — generate `custom-elements.json` for IDE/docs
+      (`vp run cem`; a plugin teaches the analyzer FAST's `.define()` convention)
 - [ ] **React wrapper** — thin `@lit-labs/react`-style bindings over the same elements
 - [ ] **Docs site** — anatomy, props/attributes, styling recipes, a11y notes
 - [ ] **First npm release** — set version, changesets, publish

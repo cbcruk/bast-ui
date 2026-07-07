@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>bast-ui · Accordion</title>
+    <script type="importmap">
+      {
+        "imports": {
+          "@microsoft/fast-element": "/node_modules/@microsoft/fast-element/dist/esm/index.js",
+          "@microsoft/fast-element/context.js": "/node_modules/@microsoft/fast-element/dist/esm/context.js"
+        }
+      }
+    </script>
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        max-width: 32rem;
+        margin: 4rem auto;
+        padding: 0 1rem;
+      }
+
+      bast-accordion {
+        display: block;
+        border: 1px solid #d0d0d0;
+        border-radius: 8px;
+        overflow: hidden;
+      }
+
+      bast-accordion-item + bast-accordion-item {
+        border-top: 1px solid #eee;
+      }
+
+      bast-accordion-trigger {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.75rem 1rem;
+        cursor: pointer;
+        user-select: none;
+        font-weight: 600;
+      }
+
+      bast-accordion-trigger:focus-visible {
+        outline: 2px solid #3b82f6;
+        outline-offset: -2px;
+      }
+
+      bast-accordion-trigger[data-disabled] {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      bast-accordion-trigger::after {
+        content: '▸';
+        transition: transform 150ms ease;
+      }
+
+      bast-accordion-trigger[data-open]::after {
+        transform: rotate(90deg);
+      }
+
+      bast-accordion-panel {
+        display: block;
+        padding: 0.25rem 1rem 0.875rem;
+        color: #444;
+        line-height: 1.5;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Accordion</h1>
+    <p>
+      Collapsible items sharing one <code>bast-accordion</code>. Single-expansion by default (open
+      one, the rest collapse); add <code>multiple</code> to allow several open at once. Each header
+      button wires <code>aria-expanded</code> / <code>aria-controls</code>; arrow keys move focus
+      between headers, Home / End jump to the ends. Style with <code>data-open</code> /
+      <code>data-closed</code> / <code>data-disabled</code>.
+    </p>
+
+    <bast-accordion value="what">
+      <bast-accordion-item value="what">
+        <bast-accordion-trigger>What is bast-ui?</bast-accordion-trigger>
+        <bast-accordion-panel>
+          A headless web-component implementation of Base UI primitives, built on FAST — no
+          framework runtime required.
+        </bast-accordion-panel>
+      </bast-accordion-item>
+
+      <bast-accordion-item value="how">
+        <bast-accordion-trigger>How do I style it?</bast-accordion-trigger>
+        <bast-accordion-panel>
+          Every part exposes <code>data-*</code> attributes instead of internal classes, so you
+          style the parts directly in light DOM.
+        </bast-accordion-panel>
+      </bast-accordion-item>
+
+      <bast-accordion-item value="soon" disabled>
+        <bast-accordion-trigger>Disabled item</bast-accordion-trigger>
+        <bast-accordion-panel>You can't reach this — the item is disabled.</bast-accordion-panel>
+      </bast-accordion-item>
+    </bast-accordion>
+
+    <script type="module">
+      import '/dist/index.mjs'
+    </script>
+  </body>
+</html>

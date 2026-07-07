@@ -1,0 +1,11 @@
+import './tabs.ts'
+import './tabs-list.ts'
+import './tabs-tab.ts'
+import './tabs-panel.ts'
+
+export { TabsRoot } from './tabs.ts'
+export { TabsList } from './tabs-list.ts'
+export { TabsTab } from './tabs-tab.ts'
+export { TabsPanel } from './tabs-panel.ts'
+export { TabsContext, type TabsContextValue } from './tabs.context.ts'
+export type { TabsActivationMode, TabsOrientation, TabsValueChangeDetail } from './tabs.types.ts'
