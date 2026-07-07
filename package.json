@@ -27,6 +27,18 @@
   "type": "module",
   "exports": {
     ".": "./dist/index.mjs",
+    "./accordion": "./dist/accordion.mjs",
+    "./checkbox": "./dist/checkbox.mjs",
+    "./collapsible": "./dist/collapsible.mjs",
+    "./dialog": "./dist/dialog.mjs",
+    "./menu": "./dist/menu.mjs",
+    "./popover": "./dist/popover.mjs",
+    "./radio-group": "./dist/radio-group.mjs",
+    "./select": "./dist/select.mjs",
+    "./switch": "./dist/switch.mjs",
+    "./tabs": "./dist/tabs.mjs",
+    "./toast": "./dist/toast.mjs",
+    "./tooltip": "./dist/tooltip.mjs",
     "./package.json": "./package.json"
   },
   "publishConfig": {

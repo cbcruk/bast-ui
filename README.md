@@ -33,8 +33,22 @@ gzipped).
 ## Usage
 
 ```ts
-import 'bast-ui'
+import 'bast-ui' // registers every primitive
 ```
+
+Or import just the primitives you use — each has its own entry point, so a
+bundler only ships the ones you touch (the shared runtime is split into a chunk
+they reference):
+
+```ts
+import 'bast-ui/dialog'
+import 'bast-ui/select'
+```
+
+Subpaths mirror the primitive names: `bast-ui/collapsible`, `bast-ui/dialog`,
+`bast-ui/popover`, `bast-ui/tabs`, `bast-ui/menu`, `bast-ui/tooltip`,
+`bast-ui/accordion`, `bast-ui/switch`, `bast-ui/checkbox`,
+`bast-ui/radio-group`, `bast-ui/select`, `bast-ui/toast`.
 
 ```html
 <bast-collapsible>
