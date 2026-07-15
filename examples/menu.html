@@ -4,14 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>bast-ui · Menu</title>
-    <script type="importmap">
-      {
-        "imports": {
-          "@microsoft/fast-element": "/node_modules/@microsoft/fast-element/dist/esm/index.js",
-          "@microsoft/fast-element/context.js": "/node_modules/@microsoft/fast-element/dist/esm/context.js"
-        }
-      }
-    </script>
     <style>
       body {
         font-family: system-ui, sans-serif;
@@ -98,7 +90,7 @@
     <p id="log" aria-live="polite" style="color: #555"></p>
 
     <script type="module">
-      import '/dist/index.mjs'
+      import '../src/index.ts'
 
       const menu = document.querySelector('bast-menu')
       const log = document.getElementById('log')
