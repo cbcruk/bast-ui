@@ -284,8 +284,27 @@ See [`examples/collapsible.html`](examples/collapsible.html),
 [`examples/accordion.html`](examples/accordion.html),
 [`examples/forms.html`](examples/forms.html),
 [`examples/select.html`](examples/select.html), and
-[`examples/toast.html`](examples/toast.html) for styled demos (serve the
-repo root and open them — the import map resolves FAST from `node_modules`).
+[`examples/toast.html`](examples/toast.html) for styled demos — run them from
+the demo site below.
+
+## Examples
+
+The [`examples/`](examples) directory is a small demo site, built as a Vite
+multi-page app. [`examples/index.html`](examples/index.html) is a gallery
+linking every primitive's live demo, and each demo page renders an
+**Attributes** table generated from `custom-elements.json` (via the tiny
+[`examples/api-table.js`](examples/api-table.js) `<bast-api-table>` element), so
+the API reference stays in sync with the source for free.
+
+```bash
+vp dev      # run the demo site locally, then open /examples/
+vp build    # build the static site into site/
+vp preview  # serve the production build
+```
+
+The site is deployed to GitHub Pages on every push to `main` by
+[`.github/workflows/pages.yml`](.github/workflows/pages.yml), which builds with
+`VITE_BASE=/bast-ui/` so assets resolve under the project subpath.
 
 ## Development
 

@@ -4,14 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>bast-ui · Accordion</title>
-    <script type="importmap">
-      {
-        "imports": {
-          "@microsoft/fast-element": "/node_modules/@microsoft/fast-element/dist/esm/index.js",
-          "@microsoft/fast-element/context.js": "/node_modules/@microsoft/fast-element/dist/esm/context.js"
-        }
-      }
-    </script>
     <style>
       body {
         font-family: system-ui, sans-serif;
@@ -102,7 +94,15 @@
     </bast-accordion>
 
     <script type="module">
-      import '/dist/index.mjs'
+      import '../src/index.ts'
     </script>
+    <section style="margin-top: 3rem">
+      <h2>Attributes</h2>
+      <bast-api-table
+        tags="bast-accordion bast-accordion-item bast-accordion-trigger bast-accordion-panel"
+      ></bast-api-table>
+      <p style="margin-top: 1.5rem"><a href="index.html">← All examples</a></p>
+    </section>
+    <script type="module" src="api-table.js"></script>
   </body>
 </html>
