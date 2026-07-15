@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>bast-ui · Examples</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --bg: #ffffff;
+        --fg: #1a1a1a;
+        --muted: #6b7280;
+        --card: #fafafa;
+        --border: #e5e7eb;
+        --accent: #3b82f6;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #0d1117;
+          --fg: #e6edf3;
+          --muted: #9198a1;
+          --card: #161b22;
+          --border: #30363d;
+          --accent: #6ea8fe;
+        }
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: system-ui, sans-serif;
+        line-height: 1.6;
+        color: var(--fg);
+        background: var(--bg);
+        max-width: 52rem;
+        margin: 0 auto;
+        padding: 4rem 1.25rem;
+      }
+
+      header {
+        margin-bottom: 2.5rem;
+      }
+
+      h1 {
+        font-size: 2.25rem;
+        margin: 0 0 0.5rem;
+      }
+
+      .tagline {
+        color: var(--muted);
+        font-size: 1.125rem;
+        margin: 0;
+      }
+
+      .note {
+        margin-top: 1.25rem;
+        padding: 0.75rem 1rem;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        font-size: 0.9375rem;
+        color: var(--muted);
+      }
+
+      code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 0.875em;
+        background: color-mix(in srgb, currentColor 10%, transparent);
+        padding: 0.1em 0.35em;
+        border-radius: 4px;
+      }
+
+      h2 {
+        font-size: 0.8125rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--muted);
+        margin: 2.5rem 0 1rem;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+        gap: 0.875rem;
+      }
+
+      a.card {
+        display: block;
+        padding: 1rem 1.125rem;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        text-decoration: none;
+        color: inherit;
+        transition:
+          border-color 120ms ease,
+          transform 120ms ease;
+      }
+
+      a.card:hover {
+        border-color: var(--accent);
+        transform: translateY(-2px);
+      }
+
+      a.card:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+      }
+
+      .card h3 {
+        margin: 0 0 0.25rem;
+        font-size: 1.0625rem;
+      }
+
+      .card p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.875rem;
+      }
+
+      footer {
+        margin-top: 3rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid var(--border);
+        color: var(--muted);
+        font-size: 0.875rem;
+      }
+
+      footer a {
+        color: var(--accent);
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>bast-ui</h1>
+      <p class="tagline">
+        Headless, accessible UI primitives as native web components — a Base UI / Radix-style layer
+        built on FAST.
+      </p>
+      <p class="note">
+        These are live, framework-free demos. Serve the repo root (<code>python -m http.server</code
+        >) and open any card — the import map resolves FAST from <code>node_modules</code> and each
+        page loads <code>/dist/index.mjs</code> (run <code>vp pack</code> first). Every page lists
+        its attributes straight from <code>custom-elements.json</code>.
+      </p>
+    </header>
+
+    <h2>Disclosure &amp; layout</h2>
+    <div class="grid">
+      <a class="card" href="collapsible.html">
+        <h3>Collapsible</h3>
+        <p>A trigger that shows and hides a panel.</p>
+      </a>
+      <a class="card" href="accordion.html">
+        <h3>Accordion</h3>
+        <p>Collapsible items with single or multiple expansion.</p>
+      </a>
+      <a class="card" href="tabs.html">
+        <h3>Tabs</h3>
+        <p>Roving tabindex, orientation, manual/automatic activation.</p>
+      </a>
+    </div>
+
+    <h2>Overlays</h2>
+    <div class="grid">
+      <a class="card" href="dialog.html">
+        <h3>Dialog</h3>
+        <p>Modal with focus trap, scroll lock, and top layer.</p>
+      </a>
+      <a class="card" href="popover.html">
+        <h3>Popover</h3>
+        <p>Non-modal, anchor-positioned, light dismiss.</p>
+      </a>
+      <a class="card" href="menu.html">
+        <h3>Menu</h3>
+        <p>Dropdown with roving focus and typeahead.</p>
+      </a>
+      <a class="card" href="tooltip.html">
+        <h3>Tooltip</h3>
+        <p>Hover/focus intent with open and close delays.</p>
+      </a>
+      <a class="card" href="select.html">
+        <h3>Select</h3>
+        <p>Listbox with typeahead and a selected-value label.</p>
+      </a>
+      <a class="card" href="toast.html">
+        <h3>Toast</h3>
+        <p>Self-managing notifications with a pausing timer.</p>
+      </a>
+    </div>
+
+    <h2>Forms</h2>
+    <div class="grid">
+      <a class="card" href="forms.html">
+        <h3>Switch, Checkbox &amp; Radio Group</h3>
+        <p>The <code>aria-checked</code> form primitives.</p>
+      </a>
+    </div>
+
+    <footer>
+      <p>
+        <a href="https://github.com/cbcruk/bast-ui">GitHub</a> · <a href="../README.md">README</a> ·
+        <a href="../ROADMAP.md">Roadmap</a>
+      </p>
+    </footer>
+  </body>
+</html>

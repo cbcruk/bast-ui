@@ -287,6 +287,23 @@ See [`examples/collapsible.html`](examples/collapsible.html),
 [`examples/toast.html`](examples/toast.html) for styled demos (serve the
 repo root and open them — the import map resolves FAST from `node_modules`).
 
+## Examples
+
+The [`examples/`](examples) directory is a small, framework-free demo site.
+Build the library, serve the repo root, and open the gallery:
+
+```bash
+vp pack                 # build dist/
+python -m http.server   # or any static server, from the repo root
+# open http://localhost:8000/examples/
+```
+
+[`examples/index.html`](examples/index.html) is a gallery linking every
+primitive's live demo. Each demo page also renders an **Attributes** table
+generated at runtime from `custom-elements.json` (via the tiny
+[`examples/api-table.js`](examples/api-table.js) `<bast-api-table>` element), so
+the API reference stays in sync with the source for free.
+
 ## Development
 
 ```bash
