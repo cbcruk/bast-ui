@@ -5,12 +5,28 @@
 //   <bast-api-table tags="bast-select bast-select-option"></bast-api-table>
 //   <script type="module" src="api-table.js"></script>
 //
-// It reuses the same manifest that ships in the package, so the tables stay in
-// sync with the source with no hand-maintenance.
+// The manifest URL is resolved relative to this script, so the widget works
+// whether the repo root is served locally or the site is deployed under a
+// subpath. It reuses the same manifest that ships in the package, so the tables
+// stay in sync with the source with no hand-maintenance.
 
-import manifest from '../custom-elements.json'
+const MANIFEST_URL = new URL('../custom-elements.json', import.meta.url)
 
-function collectElements() {
+let manifestPromise
+
+function loadManifest() {
+  manifestPromise ??= fetch(MANIFEST_URL).then((response) => {
+    if (!response.ok) {
+      throw new Error(`Failed to load custom-elements.json (${response.status})`)
+    }
+
+    return response.json()
+  })
+
+  return manifestPromise
+}
+
+function collectElements(manifest) {
   const elements = new Map()
   for (const module of manifest.modules ?? []) {
     for (const declaration of module.declarations ?? []) {
@@ -22,8 +38,6 @@ function collectElements() {
 
   return elements
 }
-
-const ELEMENTS = collectElements()
 
 const STYLES = `
   :host { display: block; font-family: system-ui, sans-serif; }
@@ -42,6 +56,7 @@ const STYLES = `
   code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
   .type { opacity: 0.75; }
   .empty { margin: 0.375rem 0 0; opacity: 0.6; font-size: 0.875rem; }
+  .error { color: #b91c1c; }
 `
 
 class BastApiTable extends HTMLElement {
@@ -50,13 +65,26 @@ class BastApiTable extends HTMLElement {
       this.attachShadow({ mode: 'open' })
     }
 
+    void this.render()
+  }
+
+  async render() {
     const tags = (this.getAttribute('tags') ?? '')
       .split(/\s+/)
       .map((tag) => tag.trim())
       .filter(Boolean)
 
+    let elements
+    try {
+      elements = collectElements(await loadManifest())
+    } catch (error) {
+      this.shadowRoot.innerHTML = `<style>${STYLES}</style><p class="error">${String(error)}</p>`
+
+      return
+    }
+
     const sections = tags.map((tag) => {
-      const declaration = ELEMENTS.get(tag)
+      const declaration = elements.get(tag)
       const attributes = declaration?.attributes ?? []
 
       const body = attributes.length

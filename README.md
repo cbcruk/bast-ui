@@ -284,27 +284,31 @@ See [`examples/collapsible.html`](examples/collapsible.html),
 [`examples/accordion.html`](examples/accordion.html),
 [`examples/forms.html`](examples/forms.html),
 [`examples/select.html`](examples/select.html), and
-[`examples/toast.html`](examples/toast.html) for styled demos — run them from
-the demo site below.
+[`examples/toast.html`](examples/toast.html) for styled demos — see below.
 
 ## Examples
 
-The [`examples/`](examples) directory is a small demo site, built as a Vite
-multi-page app. [`examples/index.html`](examples/index.html) is a gallery
-linking every primitive's live demo, and each demo page renders an
-**Attributes** table generated from `custom-elements.json` (via the tiny
+The [`examples/`](examples) directory is a small, framework-free demo site with
+no build step: [`examples/index.html`](examples/index.html) is a gallery linking
+every primitive's live demo, and each demo page renders an **Attributes** table
+generated at runtime from `custom-elements.json` (via the tiny
 [`examples/api-table.js`](examples/api-table.js) `<bast-api-table>` element), so
 the API reference stays in sync with the source for free.
 
+Build the library once, then serve the repo root and open the gallery:
+
 ```bash
-vp dev      # run the demo site locally, then open /examples/
-vp build    # build the static site into site/
-vp preview  # serve the production build
+vp pack                 # build dist/
+python -m http.server   # or any static server, from the repo root
+# open http://localhost:8000/examples/
 ```
 
-The site is deployed to GitHub Pages on every push to `main` by
-[`.github/workflows/pages.yml`](.github/workflows/pages.yml), which builds with
-`VITE_BASE=/bast-ui/` so assets resolve under the project subpath.
+Each page loads `../dist/index.mjs` and resolves FAST from `node_modules` via an
+import map — both relative — so the same static files work when served from the
+repo root locally or deployed under a subpath.
+[`.github/workflows/pages.yml`](.github/workflows/pages.yml) builds `dist/` and
+publishes `examples/` + `dist/` + `custom-elements.json` (plus FAST) to GitHub
+Pages on every push to `main`.
 
 ## Development
 

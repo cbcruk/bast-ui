@@ -1,36 +1,6 @@
 import { defineConfig } from 'vite-plus'
 
-// The demo site (examples/) is built as a Vite multi-page app via `vp build`.
-// `base` defaults to '/' for local dev/preview; the Pages workflow sets
-// VITE_BASE=/bast-ui/ so absolute asset URLs resolve under the project subpath.
-const EXAMPLE_PAGES = [
-  'index',
-  'collapsible',
-  'dialog',
-  'popover',
-  'tabs',
-  'menu',
-  'tooltip',
-  'accordion',
-  'forms',
-  'select',
-  'toast',
-]
-
 export default defineConfig({
-  base: process.env.VITE_BASE ?? '/',
-  build: {
-    outDir: 'site',
-    emptyOutDir: true,
-    rollupOptions: {
-      input: Object.fromEntries(
-        EXAMPLE_PAGES.map((page) => [
-          page,
-          new URL(`./examples/${page}.html`, import.meta.url).pathname,
-        ]),
-      ),
-    },
-  },
   staged: {
     '*': 'vp check --fix',
   },
