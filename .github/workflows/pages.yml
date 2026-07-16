@@ -25,16 +25,23 @@ jobs:
           node-version: 22
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - name: Build the demo site
-        run: pnpm exec vp build
-        env:
-          VITE_BASE: /bast-ui/
-      - name: Redirect the site root to the examples gallery
-        run: echo '<!doctype html><meta http-equiv="refresh" content="0; url=examples/" />' > site/index.html
+      - name: Build the library
+        run: pnpm exec vp pack
+      - name: Assemble the static site
+        run: |
+          mkdir -p _site/node_modules/@microsoft
+          cp -r examples _site/examples
+          cp -r dist _site/dist
+          cp custom-elements.json _site/custom-elements.json
+          # The pages' import map resolves FAST from ../node_modules (relative),
+          # so ship it alongside the demos. -L dereferences the pnpm symlink so
+          # the real files are copied, not a dangling link.
+          cp -rL node_modules/@microsoft/fast-element _site/node_modules/@microsoft/fast-element
+          echo '<!doctype html><meta http-equiv="refresh" content="0; url=examples/" />' > _site/index.html
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: site
+          path: _site
 
   deploy:
     needs: build
